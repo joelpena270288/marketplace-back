@@ -8,11 +8,8 @@ export class MailController {
 
   @Post('send-code')
   async sendCode(@Body('email') email: string) {
-    const verificationCode = Math.floor(
-      100000 + Math.random() * 900000,
-    ).toString(); // Código de 6 dígitos
-    await this.mailService.sendVerificationCode(email, verificationCode);
-    return { message: 'Código enviado', code: verificationCode };
+    const code = await this.mailService.sendVerificationCode(email);
+    return { message: 'Código enviado', code: code };
   }
 
  

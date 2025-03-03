@@ -18,6 +18,7 @@ import { plainToClass } from 'class-transformer';
 import { ReadUserDto } from './dto/read-user.dto';
 
 import { Status } from '../../EntityStatus/entity.estatus.enum';
+import { RoleEnum } from '../role/enums/role.enum';
 
 @Injectable()
 export class UsersService {
@@ -29,33 +30,38 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<ReadUserDto> {
-    const { username, password, name, lastname, email, roles } = createUserDto;
+    const { username, password, name, lastname, email } = createUserDto;
 
     const rolesfound: Role[] = [];
     const userExists = await this.userRepository.findOne({
       where: { username: username, status: Status.ACTIVO },
     });
-    if (userExists) {
+    const emailExist = await this.userRepository
+      .createQueryBuilder('user')
+      .innerJoin('user.details', 'detail')
+      .where('detail.email=:email', {
+        email: email,
+      })
+      .getOne();
+    if (userExists || emailExist) {
       throw new ConflictException('username or email already exists');
     }
-    for (let index = 0; index < roles.length; index++) {
-      const foundRole = await this.roleRepository.findOne({
-        where: { name: roles[index] },
-      });
-      if (foundRole) {
-        rolesfound.push(foundRole);
-      }
-    }
+
+    const foundRole = await this.roleRepository.findOne({
+      where: { name: RoleEnum.ESTANDAR },
+    });
 
     const user = new User();
-
+    if (foundRole) {
+      rolesfound.push(foundRole);
+    }
     user.username = username.toLowerCase();
-    user.roles = rolesfound;
+
     const detail = new UserDetails();
     detail.name = name;
     detail.lastname = lastname;
     detail.email = email;
-
+    user.roles = rolesfound;
     user.details = detail;
     user.status = Status.ACTIVO;
 
@@ -93,5 +99,23 @@ export class UsersService {
     userExists.status = Status.INACTIVO;
     await this.userRepository.save(userExists);
     return plainToClass(ReadUserDto, userExists);
+  }
+  async checkUserExists(username: string, email: string): Promise<boolean> {
+    const userExists = await this.userRepository.findOne({
+      where: { username: username.toLowerCase(), status: Status.ACTIVO },
+    });
+
+    const emailExist = await this.userRepository.findOne({
+      relations: ['details'],
+      where: { details: { email } },
+    });
+
+    if (userExists || emailExist) {
+      throw new ConflictException(
+        'El nombre de usuario o el correo ya existen',
+      );
+    }
+
+    return false;
   }
 }

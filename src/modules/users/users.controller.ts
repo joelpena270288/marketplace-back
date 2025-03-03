@@ -8,7 +8,9 @@ import { Body,
   Post,
   UseGuards,
   ParseUUIDPipe,
-  Req } from '@nestjs/common';
+  Req, 
+  Query,
+  BadRequestException} from '@nestjs/common';
   import { AuthGuard } from '@nestjs/passport';
 
 
@@ -24,8 +26,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-  @HasRoles(RoleEnum.ADMIN)
-  @UseGuards(JwtAuthGuard, RolesGuard)
+ 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
@@ -43,5 +44,16 @@ export class UsersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
+  }
+  @Get('check-exists')
+  async checkUserExists(
+    @Query('username') username: string,
+    @Query('email') email: string,
+  ) {
+    if (!username || !email) {
+      throw new BadRequestException('Se requieren username y email');
+    }
+
+    return await this.usersService.checkUserExists(username, email);
   }
 }

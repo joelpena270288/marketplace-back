@@ -9,6 +9,7 @@ export class CreateUserDto {
   name: string;
   @IsNotEmpty()
   lastname: string;  
+  @IsEmail()
   email: string;
   roles: string[];
 
