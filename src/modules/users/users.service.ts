@@ -85,7 +85,17 @@ export class UsersService {
     if (!foundUser) {
       throw new NotFoundException('No existe el usuario');
     } else {
-      return foundUser;
+      return  foundUser ;
+    }
+  }
+  async findOneByUsername(username: string): Promise<ReadUserDto> {
+    const foundUser = await this.userRepository.findOne({
+      where: { username },
+    });
+    if (!foundUser) {
+      throw new NotFoundException('No existe el usuario');
+    } else {
+      return plainToClass(ReadUserDto, foundUser) ;
     }
   }
 

@@ -23,6 +23,9 @@ import { RolesGuard } from '../role/guards/roles.guard';
 import { HasRoles } from '../role/roles.decorator';
 
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { GetUser } from '../auth/user.decorator';
+import { User } from './entities/user.entity';
+import { use } from 'passport';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -31,13 +34,18 @@ export class UsersController {
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
-  @HasRoles(RoleEnum.ADMIN)
+  @HasRoles(RoleEnum.ADMIN, RoleEnum.EDITOR,RoleEnum.ESTANDAR,RoleEnum.PREMIUN,RoleEnum.USER)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
- 
+  @HasRoles(RoleEnum.ADMIN,RoleEnum.EDITOR,RoleEnum.ESTANDAR,RoleEnum.PREMIUN,RoleEnum.USER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Get('/username')
+  findByUsername(@GetUser() user: User) {
+    return this.usersService.findOneByUsername(user.username);
+  }
  
   @HasRoles(RoleEnum.ADMIN)
   @UseGuards(JwtAuthGuard, RolesGuard)

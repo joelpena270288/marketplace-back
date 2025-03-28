@@ -12,7 +12,7 @@ export class MailService {
     // service: 'gmail', // Usa Gmail, SMTP u otro servicio
     auth: {
       user: 'joelpenagonzalez122@gmail.com', // Configura tu correo
-      pass: 'slvx pjqj swwv ubcf*', // Usa una contraseña segura o App Password
+      pass: 'slvxpjqjswwvubcf*', // Usa una contraseña segura o App Password
       //pass: 'Yoslaidy2506*'
     },
   });
@@ -26,7 +26,7 @@ export class MailService {
       text: `Tu código de verificación es: ${code}`,
     };
 
-    // await this.transporter.sendMail(mailOptions);
+    await this.transporter.sendMail(mailOptions);
     return code;
   }
 }

@@ -11,4 +11,7 @@ export class ReadDetailsDto {
   @Expose()
   @IsString()
   readonly email: string;
+  @Expose()
+  @IsString()
+  readonly photo: string;
 }
