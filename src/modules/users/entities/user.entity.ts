@@ -1,5 +1,4 @@
 import {
-  BaseEntity,
   Column,
   Entity,
   JoinTable,
@@ -9,15 +8,12 @@ import {
   JoinColumn,
   CreateDateColumn,
   OneToMany,
-  ManyToOne,
-  BeforeInsert,
 } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 import { Role } from '../../role/entities/role.entity';
 import { UserDetails } from '../user.details.entity';
 import { Status } from '../../../EntityStatus/entity.estatus.enum';
 import { CommunityPost } from '../../comunity-post/entities/comunity-post.entity';
-import { Comment } from '../../comment/entities/comment.entity'
+import { Comment } from '../../comment/entities/comment.entity';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -27,7 +23,7 @@ export class User {
 
   @Column({ type: 'varchar', nullable: false })
   password: string;
-  @OneToOne((type) => UserDetails, {
+  @OneToOne(() => UserDetails, {
     cascade: true,
     nullable: false,
     eager: true,
@@ -35,7 +31,7 @@ export class User {
   @JoinColumn({ name: 'detail_id' })
   details: UserDetails;
 
-  @ManyToMany((type) => Role, (role) => role.users, { eager: true })
+  @ManyToMany(() => Role, (role) => role.users, { eager: true })
   @JoinTable()
   roles: Role[];
   @Column({ type: 'varchar', default: Status.ACTIVO, length: 10 })

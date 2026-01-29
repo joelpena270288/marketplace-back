@@ -1,6 +1,5 @@
-export  enum Status{
-   ACTIVO = 'ACTIVO',
-   INACTIVO = 'INACTIVO',
-   BORRADOR = 'BORRADOR' 
-
+export enum Status {
+  ACTIVO = 'ACTIVO',
+  INACTIVO = 'INACTIVO',
+  BORRADOR = 'BORRADOR',
 }

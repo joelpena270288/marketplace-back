@@ -4,7 +4,8 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 
 @Injectable()
 export class CommentService {
-  create(createCommentDto: CreateCommentDto) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  create(_createCommentDto: CreateCommentDto) {
     return 'This action adds a new comment';
   }
 
@@ -16,7 +17,8 @@ export class CommentService {
     return `This action returns a #${id} comment`;
   }
 
-  update(id: number, updateCommentDto: UpdateCommentDto) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  update(id: number, _updateCommentDto: UpdateCommentDto) {
     return `This action updates a #${id} comment`;
   }
 

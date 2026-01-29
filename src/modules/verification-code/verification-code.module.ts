@@ -8,6 +8,6 @@ import { DatabaseModule } from '../../database/database.module';
   imports: [DatabaseModule],
   controllers: [VerificationCodeController],
   providers: [VerificationService, ...VerificationCodeProviders],
-  exports: [VerificationService]
+  exports: [VerificationService],
 })
 export class VerificationCodeModule {}

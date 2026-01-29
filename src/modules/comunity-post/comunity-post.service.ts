@@ -4,7 +4,8 @@ import { UpdateComunityPostDto } from './dto/update-comunity-post.dto';
 
 @Injectable()
 export class ComunityPostService {
-  create(createComunityPostDto: CreateComunityPostDto) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  create(_createComunityPostDto: CreateComunityPostDto) {
     return 'This action adds a new comunityPost';
   }
 
@@ -16,7 +17,8 @@ export class ComunityPostService {
     return `This action returns a #${id} comunityPost`;
   }
 
-  update(id: number, updateComunityPostDto: UpdateComunityPostDto) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  update(id: number, _updateComunityPostDto: UpdateComunityPostDto) {
     return `This action updates a #${id} comunityPost`;
   }
 

@@ -4,7 +4,8 @@ import { UpdateLogDto } from './dto/update-log.dto';
 
 @Injectable()
 export class LogService {
-  create(createLogDto: CreateLogDto) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  create(_createLogDto: CreateLogDto) {
     return 'This action adds a new log';
   }
 
@@ -16,7 +17,8 @@ export class LogService {
     return `This action returns a #${id} log`;
   }
 
-  update(id: number, updateLogDto: UpdateLogDto) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  update(id: number, _updateLogDto: UpdateLogDto) {
     return `This action updates a #${id} log`;
   }
 

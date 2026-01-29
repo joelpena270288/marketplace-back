@@ -1,6 +1,5 @@
 import { Type, Exclude, Expose } from 'class-transformer';
-import { IsNumber, IsEmail, IsString, IsDate } from 'class-validator';
-import { ReadRolDto } from '../../role/dto/read-role-dto';
+import { IsString, IsDate } from 'class-validator';
 import { UserDetails } from '../user.details.entity';
 import { Role } from '../../role/entities/role.entity';
 
@@ -15,10 +14,10 @@ export class ReadUserDto {
   @IsString()
   password: string;
   @Expose()
-  @Type((type) => UserDetails)
+  @Type(() => UserDetails)
   details: UserDetails;
   @Expose()
-  @Type((type) => Role)
+  @Type(() => Role)
   roles: Role[];
   @Expose()
   @IsString()

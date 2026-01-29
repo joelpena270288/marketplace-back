@@ -3,9 +3,6 @@ import {
   Injectable,
   Inject,
   NotFoundException,
-  UnauthorizedException,
-  BadRequestException,
-  HttpStatus,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Repository } from 'typeorm';
@@ -85,8 +82,13 @@ export class UsersService {
     if (!foundUser) {
       throw new NotFoundException('No existe el usuario');
     } else {
-      return  foundUser ;
+      return foundUser;
     }
+  }
+  async findById(id: string): Promise<User> {
+    const found = await this.userRepository.findOne({ where: { id } });
+    if (!found) throw new NotFoundException('Usuario no encontrado');
+    return found;
   }
   async findOneByUsername(username: string): Promise<ReadUserDto> {
     const foundUser = await this.userRepository.findOne({
@@ -95,7 +97,7 @@ export class UsersService {
     if (!foundUser) {
       throw new NotFoundException('No existe el usuario');
     } else {
-      return plainToClass(ReadUserDto, foundUser) ;
+      return plainToClass(ReadUserDto, foundUser);
     }
   }
 

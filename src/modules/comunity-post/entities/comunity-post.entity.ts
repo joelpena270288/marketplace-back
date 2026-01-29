@@ -23,11 +23,9 @@ export class CommunityPost {
   @ManyToOne(() => User, (user) => user.communityPosts)
   user: User; // Usuario que publica.
 
-
   @OneToMany(() => Comment, (comment) => comment.post)
   comments: Comment[];
 
   @CreateDateColumn()
   createdAt: Date;
 }
-

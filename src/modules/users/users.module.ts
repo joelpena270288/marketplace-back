@@ -5,7 +5,6 @@ import { UserProviders } from './user.providers';
 import { DatabaseModule } from '../../database/database.module';
 import { RoleProviders } from '../role/role.providers';
 
-
 @Module({
   imports: [DatabaseModule],
   providers: [...UserProviders, UsersService, ...RoleProviders],

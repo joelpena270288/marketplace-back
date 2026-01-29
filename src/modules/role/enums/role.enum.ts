@@ -3,5 +3,5 @@ export enum RoleEnum {
   USER = 'guest',
   EDITOR = 'editor',
   PREMIUN = 'premiun',
-  ESTANDAR = 'estandar'
+  ESTANDAR = 'estandar',
 }

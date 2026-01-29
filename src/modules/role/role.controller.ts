@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
@@ -16,23 +25,13 @@ export class RoleController {
   create(@Body() createRoleDto: CreateRoleDto) {
     return this.roleService.create(createRoleDto);
   }
-  @HasRoles(
-    RoleEnum.ADMIN,
-    RoleEnum.EDITOR,
-    RoleEnum.USER
-   
-  )
+  @HasRoles(RoleEnum.ADMIN, RoleEnum.EDITOR, RoleEnum.USER)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
   findAll() {
     return this.roleService.findAll();
   }
-  @HasRoles(
-    RoleEnum.ADMIN,
-    RoleEnum.EDITOR,
-    RoleEnum.USER
-   
-  )
+  @HasRoles(RoleEnum.ADMIN, RoleEnum.EDITOR, RoleEnum.USER)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {

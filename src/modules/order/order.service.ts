@@ -4,7 +4,8 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 
 @Injectable()
 export class OrderService {
-  create(createOrderDto: CreateOrderDto) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  create(_createOrderDto: CreateOrderDto) {
     return 'This action adds a new order';
   }
 
@@ -16,7 +17,8 @@ export class OrderService {
     return `This action returns a #${id} order`;
   }
 
-  update(id: number, updateOrderDto: UpdateOrderDto) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  update(id: number, _updateOrderDto: UpdateOrderDto) {
     return `This action updates a #${id} order`;
   }
 

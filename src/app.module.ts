@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { Configuration } from './config/config.keys';
 import { ConfigService } from './config/config.service';
 import { ConfigModule } from './config/config.module';
+import { DatabaseModule } from './database/database.module';
 import { RoleModule } from './modules/role/role.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
@@ -9,6 +10,7 @@ import { MailModule } from './modules/mail/mail.module';
 import { VerificationCodeModule } from './modules/verification-code/verification-code.module';
 import { ChatModule } from './modules/chat/chat.module';
 import { MessageModule } from './modules/message/message.module';
+import { ConversationModule } from './modules/conversation/conversation.module';
 import { CommentModule } from './modules/comment/comment.module';
 import { ProductModule } from './modules/product/product.module';
 import { OrderModule } from './modules/order/order.module';
@@ -19,15 +21,17 @@ import { NotificationModule } from './modules/notification/notification.module';
 @Module({
   imports: [
     ConfigModule,
+    DatabaseModule,
     RoleModule,
     AuthModule,
     UsersModule,
-
     MailModule,
     VerificationCodeModule,
     ChatModule,
     MessageModule,
-   
+    ConversationModule,
+  DatabaseModule,
+
     CommentModule,
     ProductModule,
     OrderModule,
