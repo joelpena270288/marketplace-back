@@ -17,6 +17,9 @@ import { OrderModule } from './modules/order/order.module';
 import { ComunityPostModule } from './modules/comunity-post/comunity-post.module';
 import { LogModule } from './modules/log/log.module';
 import { NotificationModule } from './modules/notification/notification.module';
+import { AppConfigModule } from './modules/config/config.module';
+import { StoreModule } from './modules/store/store.module';
+import { ServiceModule } from './modules/service/service.module';
 
 @Module({
   imports: [
@@ -30,14 +33,15 @@ import { NotificationModule } from './modules/notification/notification.module';
     ChatModule,
     MessageModule,
     ConversationModule,
-  DatabaseModule,
-
     CommentModule,
     ProductModule,
     OrderModule,
     ComunityPostModule,
     LogModule,
     NotificationModule,
+    AppConfigModule,
+    StoreModule,
+    ServiceModule,
   ],
   controllers: [],
   providers: [],

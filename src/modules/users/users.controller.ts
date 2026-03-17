@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
   BadRequestException,
   UseGuards,
@@ -61,6 +62,14 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }
+
+  @HasRoles(RoleEnum.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Put(':id')
+  update(@Param('id') id: string, @Body() updateData: { status: string }) {
+    return this.usersService.updateStatus(id, updateData.status);
+  }
+
   @Get('check-exists')
   async checkUserExists(
     @Query('username') username: string,

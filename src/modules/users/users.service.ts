@@ -112,6 +112,19 @@ export class UsersService {
     await this.userRepository.save(userExists);
     return plainToClass(ReadUserDto, userExists);
   }
+
+  async updateStatus(id: string, status: string): Promise<ReadUserDto> {
+    const userExists = await this.userRepository.findOne({
+      where: { id: id },
+    });
+    if (!userExists) {
+      throw new NotFoundException('El usuario no existe');
+    }
+    userExists.status = status;
+    await this.userRepository.save(userExists);
+    return plainToClass(ReadUserDto, userExists);
+  }
+
   async checkUserExists(username: string, email: string): Promise<boolean> {
     const userExists = await this.userRepository.findOne({
       where: { username: username.toLowerCase(), status: Status.ACTIVO },

@@ -25,4 +25,12 @@ export class ProductService {
   remove(id: number) {
     return `This action removes a #${id} product`;
   }
+
+  updateStatus(id: number, status: string) {
+    return {
+      id,
+      status,
+      message: `Producto ${id} actualizado a estado ${status}`,
+    };
+  }
 }
